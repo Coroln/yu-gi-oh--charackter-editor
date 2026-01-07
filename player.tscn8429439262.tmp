@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4s5hju6lsam8"]
+
+[ext_resource type="Script" uid="uid://gffbmgi2mh2m" path="res://player.gd" id="1_sweqy"]
+[ext_resource type="Texture2D" uid="uid://0fouc5807xp4" path="res://CompositeSpritesheet/yugioh char creator - Male Player Customization - Hairstyles2.png" id="2_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://clpn71dmpgt4d" path="res://CompositeSpritesheet/yugioh char creator - Male Player Customization - Hairstyles.png" id="2_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://cy3id7otio2gw" path="res://CompositeSpritesheet/yugioh char creator - Male Player Customization - Faces.png" id="3_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://m11ayfa5muew" path="res://CompositeSpritesheet/body1.png" id="3_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://0yrsx4js21rr" path="res://CompositeSpritesheet/yugioh char creator - Male Player Customization - Duel Disks.png" id="5_b26j0"]
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_sweqy")
+
+[node name="CompositeSprite" type="Node2D" parent="."]
+
+[node name="Hair2" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(519, 4329)
+texture = ExtResource("2_1jxqw")
+
+[node name="Clothes" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(519, 300)
+texture = ExtResource("3_2hs0m")
+
+[node name="Face" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(1071, 1573)
+texture = ExtResource("3_1jxqw")
+
+[node name="Hair" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(519, 310)
+texture = ExtResource("2_2hs0m")
+vframes = 20
+
+[node name="DuelDisk" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(1071, 1573)
+texture = ExtResource("5_b26j0")
+
+[node name="ChangeHair" type="Button" parent="."]
+offset_left = 107.0
+offset_top = 145.0
+offset_right = 210.0
+offset_bottom = 220.0
+
+[connection signal="pressed" from="ChangeHair" to="." method="_on_change_hair_pressed"]

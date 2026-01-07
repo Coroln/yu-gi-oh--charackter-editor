@@ -1,0 +1,299 @@
+[gd_scene load_steps=13 format=3 uid="uid://b4s5hju6lsam8"]
+
+[ext_resource type="Script" uid="uid://gffbmgi2mh2m" path="res://player.gd" id="1_sweqy"]
+[ext_resource type="Texture2D" uid="uid://cch4iikyou31r" path="res://background editor.png" id="2_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://f67ck1n6my13" path="res://CompositeSpritesheet/hair_bottom1.png" id="2_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://m11ayfa5muew" path="res://CompositeSpritesheet/body1.png" id="3_2hs0m"]
+[ext_resource type="Shader" uid="uid://bfjmuwf0o4hgi" path="res://player.gdshader" id="3_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://xdeiaaxki8rn" path="res://CompositeSpritesheet/face1.png" id="4_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://lk7tbv2gr8yk" path="res://CompositeSpritesheet/hair_top1.png" id="5_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://c78d7fj6yd27c" path="res://CompositeSpritesheet/dueldisk1.png" id="6_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://dvm3qo38i1xlt" path="res://CompositeSpritesheet/wooden_arrow.png" id="8_dw050"]
+[ext_resource type="Texture2D" uid="uid://bfuiehpeqh43r" path="res://CompositeSpritesheet/wooden_button.png" id="9_b26j0"]
+[ext_resource type="Texture2D" uid="uid://bq70n4gp3qvy3" path="res://CompositeSpritesheet/wooden_button_red.png" id="10_n7ghd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nvl01"]
+shader = ExtResource("3_n7ghd")
+shader_parameter/hair_color = Color(1, 1, 1, 1)
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_sweqy")
+
+[node name="BackgroundEditor" type="Sprite2D" parent="."]
+position = Vector2(576.00006, 324)
+scale = Vector2(0.5514601, 0.552901)
+texture = ExtResource("2_1jxqw")
+
+[node name="CompositeSprite" type="Node2D" parent="."]
+
+[node name="Hair2" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(562, 288)
+texture = ExtResource("2_2hs0m")
+
+[node name="Clothes" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(562, 288)
+texture = ExtResource("3_2hs0m")
+
+[node name="Face" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(562, 288)
+texture = ExtResource("4_2hs0m")
+
+[node name="Hair" type="Sprite2D" parent="CompositeSprite"]
+material = SubResource("ShaderMaterial_nvl01")
+position = Vector2(562, 288)
+texture = ExtResource("5_1jxqw")
+
+[node name="DuelDisk" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(562, 288)
+texture = ExtResource("6_2hs0m")
+
+[node name="ChangeHair" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 129.0
+offset_top = 132.0
+offset_right = 955.0
+offset_bottom = 436.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="hair" type="RichTextLabel" parent="ChangeHair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.22226
+offset_top = -113.111115
+offset_right = 192.55554
+offset_bottom = 114.666626
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Hair"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ChangeFace" type="TextureButton" parent="."]
+offset_left = 129.0
+offset_top = 207.0
+offset_right = 955.0
+offset_bottom = 511.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="face" type="RichTextLabel" parent="ChangeFace"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.22217
+offset_top = -124.221924
+offset_right = 209.22217
+offset_bottom = 103.55582
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Face"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ChangeClothes" type="TextureButton" parent="."]
+offset_left = 128.99998
+offset_top = 286.00003
+offset_right = 955.0
+offset_bottom = 590.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="clothes" type="RichTextLabel" parent="ChangeClothes"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 27.77771
+offset_right = 744.4446
+offset_bottom = 319.11108
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Clothes"
+
+[node name="ChangeDueldisk" type="TextureButton" parent="."]
+offset_left = 129.0
+offset_top = 364.00006
+offset_right = 955.0
+offset_bottom = 668.00006
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="dueldisk" type="RichTextLabel" parent="ChangeDueldisk"]
+layout_mode = 0
+offset_left = 122.222046
+offset_top = 27.777588
+offset_right = 800.00006
+offset_bottom = 255.55518
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Dueldisk"
+
+[node name="Random" type="TextureButton" parent="."]
+offset_left = 128.99998
+offset_top = 429.00006
+offset_right = 961.0
+offset_bottom = 733.0001
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("9_b26j0")
+
+[node name="random" type="RichTextLabel" parent="Random"]
+layout_mode = 0
+offset_left = 122.22211
+offset_top = 38.88867
+offset_right = 800.0001
+offset_bottom = 266.66626
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Random"
+
+[node name="ChangeHairBack" type="TextureButton" parent="."]
+offset_left = 850.0001
+offset_top = 131.99998
+offset_right = 1676.0002
+offset_bottom = 436.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="hair2" type="RichTextLabel" parent="ChangeHairBack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.66705
+offset_top = -113.111084
+offset_right = 148.11102
+offset_bottom = 114.66666
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Hair"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ChangeFaceBack" type="TextureButton" parent="."]
+offset_left = 850.0
+offset_top = 207.0
+offset_right = 1676.0
+offset_bottom = 511.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="face2" type="RichTextLabel" parent="ChangeFaceBack"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -5.721
+anchor_top = -3.7790003
+anchor_right = -5.721
+anchor_bottom = -3.7790003
+offset_left = 4947.7686
+offset_top = 1176.5939
+offset_right = 5292.2134
+offset_bottom = 1404.3716
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Face"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ChangeClothesBack" type="TextureButton" parent="."]
+offset_left = 850.0
+offset_top = 286.0
+offset_right = 1676.0
+offset_bottom = 590.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="clothes2" type="RichTextLabel" parent="ChangeClothesBack"]
+layout_mode = 0
+offset_left = 94.44441
+offset_top = 22.222305
+offset_right = 709.889
+offset_bottom = 313.55566
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Clothes"
+
+[node name="ChangeDueldiskBack" type="TextureButton" parent="."]
+offset_left = 850.0
+offset_top = 364.0
+offset_right = 1676.0
+offset_bottom = 668.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="dueldisk2" type="RichTextLabel" parent="ChangeDueldiskBack"]
+layout_mode = 0
+offset_left = 94.444
+offset_top = 27.778
+offset_right = 772.22205
+offset_bottom = 255.55559
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Dueldisk"
+
+[node name="Save" type="TextureButton" parent="."]
+offset_left = 850.0
+offset_top = 429.0
+offset_right = 1682.0
+offset_bottom = 733.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("9_b26j0")
+
+[node name="save" type="RichTextLabel" parent="Save"]
+layout_mode = 0
+offset_left = 94.444
+offset_top = 38.889
+offset_right = 772.2218
+offset_bottom = 266.66656
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Save"
+
+[node name="ChangeHairRed" type="TextureButton" parent="."]
+offset_left = 311.0
+offset_top = 514.99994
+offset_right = 625.0
+offset_bottom = 841.99994
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("10_n7ghd")
+
+[connection signal="pressed" from="ChangeHair" to="." method="_on_change_hair_pressed"]
+[connection signal="pressed" from="ChangeFace" to="." method="_on_change_face_pressed"]
+[connection signal="pressed" from="ChangeClothes" to="." method="_on_change_clothes_pressed"]
+[connection signal="pressed" from="ChangeDueldisk" to="." method="_on_change_dueldisk_pressed"]
+[connection signal="pressed" from="Random" to="." method="_on_random_pressed"]
+[connection signal="pressed" from="ChangeHairBack" to="." method="_on_change_hair_back_pressed"]
+[connection signal="pressed" from="ChangeFaceBack" to="." method="_on_change_face_back_pressed"]
+[connection signal="pressed" from="ChangeClothesBack" to="." method="_on_change_clothes_back_pressed"]
+[connection signal="pressed" from="ChangeDueldiskBack" to="." method="_on_change_dueldisk_back_pressed"]
+[connection signal="pressed" from="Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="ChangeHairRed" to="." method="_on_change_hair_red_pressed"]

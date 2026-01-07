@@ -1,0 +1,621 @@
+[gd_scene load_steps=29 format=3 uid="uid://b4s5hju6lsam8"]
+
+[ext_resource type="Script" uid="uid://gffbmgi2mh2m" path="res://player.gd" id="1_sweqy"]
+[ext_resource type="Texture2D" uid="uid://cch4iikyou31r" path="res://background editor.png" id="2_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://f67ck1n6my13" path="res://CompositeSpritesheet/hair_bottom1.png" id="2_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://c4e6ssqmkexln" path="res://CompositeSpritesheet/background editor2.png" id="3_5tmop"]
+[ext_resource type="Texture2D" uid="uid://d2dhy6he4cm8t" path="res://CompositeSpritesheet/wooden_beam.png" id="3_pbfsw"]
+[ext_resource type="Texture2D" uid="uid://lk7tbv2gr8yk" path="res://CompositeSpritesheet/hair_top1.png" id="5_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://c78d7fj6yd27c" path="res://CompositeSpritesheet/dueldisk1.png" id="6_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://bmwqnsq305q6c" path="res://CompositeSpritesheet/body1_skin.png" id="6_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://dvm3qo38i1xlt" path="res://CompositeSpritesheet/wooden_arrow.png" id="8_dw050"]
+[ext_resource type="Texture2D" uid="uid://bfuiehpeqh43r" path="res://CompositeSpritesheet/wooden_button.png" id="9_b26j0"]
+[ext_resource type="Texture2D" uid="uid://bq70n4gp3qvy3" path="res://CompositeSpritesheet/wooden_button_red.png" id="10_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://ctgj27fm1eano" path="res://CompositeSpritesheet/wooden_button_blue.png" id="11_nvl01"]
+[ext_resource type="Texture2D" uid="uid://d2l7fvmne6r6g" path="res://CompositeSpritesheet/wooden_button_clickt.png" id="12_5tmop"]
+[ext_resource type="Texture2D" uid="uid://dfv8ilaxm2r05" path="res://CompositeSpritesheet/wooden_button_green.png" id="12_ivps1"]
+[ext_resource type="Texture2D" uid="uid://dd82kkcoorx2q" path="res://CompositeSpritesheet/wooden_button_light_blue.png" id="13_urp6f"]
+[ext_resource type="Texture2D" uid="uid://bvobmqdijo30a" path="res://CompositeSpritesheet/wooden_button_orange.png" id="14_bwjto"]
+[ext_resource type="Texture2D" uid="uid://cfabfn4h423wl" path="res://CompositeSpritesheet/wooden_button_pink.png" id="15_606se"]
+[ext_resource type="Texture2D" uid="uid://bwpiqphx5iqy3" path="res://CompositeSpritesheet/wooden_button_purple.png" id="16_u1c27"]
+[ext_resource type="Texture2D" uid="uid://bpvm1ac42xfqt" path="res://CompositeSpritesheet/wooden_button_skin_dark.png" id="17_op7ga"]
+[ext_resource type="Texture2D" uid="uid://esvuh0lr075j" path="res://CompositeSpritesheet/wooden_button_yellow.png" id="18_q13i1"]
+[ext_resource type="Texture2D" uid="uid://bjk1nneu6tj41" path="res://CompositeSpritesheet/wooden_button_skin_light.png" id="20_pbfsw"]
+
+[sub_resource type="Shader" id="Shader_5tmop"]
+code = "shader_type canvas_item;
+
+uniform vec4 skin_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform sampler2D skin_mask;
+
+void fragment() {
+    vec4 base = texture(TEXTURE, UV);
+    float mask = texture(skin_mask, UV).r;
+
+    vec3 final_color = mix(base.rgb, base.rgb * skin_color.rgb, mask);
+
+    COLOR = vec4(final_color, base.a);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ahtn"]
+shader = SubResource("Shader_5tmop")
+shader_parameter/skin_color = Color(1, 1, 1, 1)
+shader_parameter/skin_mask = ExtResource("6_7ahtn")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pbfsw"]
+load_path = "res://.godot/imported/body1.png-f529bdfd2f1cef24cf44a795e51cbad1.ctex"
+
+[sub_resource type="Shader" id="Shader_pylmc"]
+code = "shader_type canvas_item;
+
+uniform vec4 skin_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform sampler2D skin_mask;
+
+void fragment() {
+    vec4 base = texture(TEXTURE, UV);
+    float mask = texture(skin_mask, UV).r;
+
+    vec3 final_color = mix(base.rgb, base.rgb * skin_color.rgb, mask);
+
+    COLOR = vec4(final_color, base.a);
+}
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pylmc"]
+load_path = "res://.godot/imported/face1_skin.png-36f3ba0cf8cad99c3f4521fd79f8fdab.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbfsw"]
+shader = SubResource("Shader_pylmc")
+shader_parameter/skin_color = Color(1, 1, 1, 1)
+shader_parameter/skin_mask = SubResource("CompressedTexture2D_pylmc")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5tmop"]
+load_path = "res://.godot/imported/face1.png-2ade80dd09e07e09bfbed2ed8ea7c11c.ctex"
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_sweqy")
+
+[node name="BackgroundEditor" type="Sprite2D" parent="."]
+position = Vector2(576.00006, 324)
+scale = Vector2(0.5514601, 0.552901)
+texture = ExtResource("2_1jxqw")
+
+[node name="CompositeSprite" type="Node2D" parent="."]
+
+[node name="BackgroundEditor2" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(561.875, 287.75)
+scale = Vector2(0.55139935, 0.55244255)
+texture = ExtResource("3_5tmop")
+
+[node name="Hair2" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(562, 288)
+texture = ExtResource("2_2hs0m")
+
+[node name="Clothes" type="Sprite2D" parent="CompositeSprite"]
+material = SubResource("ShaderMaterial_7ahtn")
+position = Vector2(562, 288)
+texture = SubResource("CompressedTexture2D_pbfsw")
+
+[node name="Face" type="Sprite2D" parent="CompositeSprite"]
+material = SubResource("ShaderMaterial_pbfsw")
+position = Vector2(562, 288)
+texture = SubResource("CompressedTexture2D_5tmop")
+
+[node name="Hair" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(562, 288)
+texture = ExtResource("5_1jxqw")
+
+[node name="DuelDisk" type="Sprite2D" parent="CompositeSprite"]
+position = Vector2(562, 288)
+texture = ExtResource("6_2hs0m")
+
+[node name="WoodenBeam" type="Sprite2D" parent="."]
+position = Vector2(560, 570)
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("3_pbfsw")
+
+[node name="ChangeHair" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 129.0
+offset_top = 132.0
+offset_right = 955.0
+offset_bottom = 436.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="hair" type="RichTextLabel" parent="ChangeHair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.22226
+offset_top = -113.111115
+offset_right = 192.55554
+offset_bottom = 114.666626
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Hair"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ChangeFace" type="TextureButton" parent="."]
+offset_left = 129.0
+offset_top = 207.0
+offset_right = 955.0
+offset_bottom = 511.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="face" type="RichTextLabel" parent="ChangeFace"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.22217
+offset_top = -124.221924
+offset_right = 209.22217
+offset_bottom = 103.55582
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Face"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ChangeClothes" type="TextureButton" parent="."]
+offset_left = 128.99998
+offset_top = 286.00003
+offset_right = 955.0
+offset_bottom = 590.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="clothes" type="RichTextLabel" parent="ChangeClothes"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 27.77771
+offset_right = 744.4446
+offset_bottom = 319.11108
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Clothes"
+
+[node name="ChangeDueldisk" type="TextureButton" parent="."]
+offset_left = 129.0
+offset_top = 364.00006
+offset_right = 955.0
+offset_bottom = 668.00006
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="dueldisk" type="RichTextLabel" parent="ChangeDueldisk"]
+layout_mode = 0
+offset_left = 122.222046
+offset_top = 27.777588
+offset_right = 800.00006
+offset_bottom = 255.55518
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Dueldisk"
+
+[node name="Random" type="TextureButton" parent="."]
+offset_left = 128.99998
+offset_top = 429.00006
+offset_right = 961.0
+offset_bottom = 733.0001
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("9_b26j0")
+
+[node name="random" type="RichTextLabel" parent="Random"]
+layout_mode = 0
+offset_left = 122.22211
+offset_top = 38.88867
+offset_right = 800.0001
+offset_bottom = 266.66626
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Random"
+
+[node name="ChangeHairBack" type="TextureButton" parent="."]
+offset_left = 850.0001
+offset_top = 131.99998
+offset_right = 1676.0002
+offset_bottom = 436.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="hair2" type="RichTextLabel" parent="ChangeHairBack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.66705
+offset_top = -113.111084
+offset_right = 148.11102
+offset_bottom = 114.66666
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Hair"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ChangeFaceBack" type="TextureButton" parent="."]
+offset_left = 850.0
+offset_top = 207.0
+offset_right = 1676.0
+offset_bottom = 511.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="face2" type="RichTextLabel" parent="ChangeFaceBack"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -5.721
+anchor_top = -3.7790003
+anchor_right = -5.721
+anchor_bottom = -3.7790003
+offset_left = 4947.7686
+offset_top = 1176.5939
+offset_right = 5292.2134
+offset_bottom = 1404.3716
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Face"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ChangeClothesBack" type="TextureButton" parent="."]
+offset_left = 850.0
+offset_top = 286.0
+offset_right = 1676.0
+offset_bottom = 590.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="clothes2" type="RichTextLabel" parent="ChangeClothesBack"]
+layout_mode = 0
+offset_left = 94.44441
+offset_top = 22.222305
+offset_right = 709.889
+offset_bottom = 313.55566
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Clothes"
+
+[node name="ChangeDueldiskBack" type="TextureButton" parent="."]
+offset_left = 850.0
+offset_top = 364.0
+offset_right = 1676.0
+offset_bottom = 668.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="dueldisk2" type="RichTextLabel" parent="ChangeDueldiskBack"]
+layout_mode = 0
+offset_left = 94.444
+offset_top = 27.778
+offset_right = 772.22205
+offset_bottom = 255.55559
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Dueldisk"
+
+[node name="Save" type="TextureButton" parent="."]
+offset_left = 850.0
+offset_top = 429.0
+offset_right = 1682.0
+offset_bottom = 733.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("9_b26j0")
+
+[node name="save" type="RichTextLabel" parent="Save"]
+layout_mode = 0
+offset_left = 94.444
+offset_top = 38.889
+offset_right = 772.2218
+offset_bottom = 266.66656
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 150
+text = "Save"
+
+[node name="ResetColor" type="TextureButton" parent="."]
+offset_left = 194.99998
+offset_top = 516.99994
+offset_right = 1027.0
+offset_bottom = 820.99994
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("9_b26j0")
+
+[node name="reset" type="RichTextLabel" parent="ResetColor"]
+layout_mode = 0
+offset_left = 40.000122
+offset_top = 40.00061
+offset_right = 810.0001
+offset_bottom = 267.7782
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 140
+text = "Reset Color"
+
+[node name="ChangeHairRed" type="TextureButton" parent="."]
+offset_left = 311.0
+offset_top = 509.00003
+offset_right = 625.0
+offset_bottom = 836.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("10_n7ghd")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeHairBlue" type="TextureButton" parent="."]
+offset_left = 356.0
+offset_top = 509.00003
+offset_right = 670.0
+offset_bottom = 836.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("11_nvl01")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeHairGreen" type="TextureButton" parent="."]
+offset_left = 311.0
+offset_top = 554.0
+offset_right = 625.0
+offset_bottom = 881.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("12_ivps1")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeHairAqua" type="TextureButton" parent="."]
+offset_left = 356.0
+offset_top = 554.0
+offset_right = 670.0
+offset_bottom = 881.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("13_urp6f")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeHairOrange" type="TextureButton" parent="."]
+offset_left = 311.0
+offset_top = 599.0
+offset_right = 625.0
+offset_bottom = 926.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("14_bwjto")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeHairPink" type="TextureButton" parent="."]
+offset_left = 356.0
+offset_top = 599.0
+offset_right = 670.0
+offset_bottom = 926.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("15_606se")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeHairPurple" type="TextureButton" parent="."]
+offset_left = 401.0
+offset_top = 509.0
+offset_right = 715.0
+offset_bottom = 836.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("16_u1c27")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeHairBrown" type="TextureButton" parent="."]
+offset_left = 401.0
+offset_top = 554.0
+offset_right = 715.0
+offset_bottom = 881.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("17_op7ga")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeHairYellow" type="TextureButton" parent="."]
+offset_left = 401.0
+offset_top = 599.0
+offset_right = 715.0
+offset_bottom = 926.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("18_q13i1")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="HairColor" type="RichTextLabel" parent="."]
+offset_left = 446.0
+offset_top = 608.0
+offset_right = 548.0
+offset_bottom = 666.0
+text = " Hair Color"
+
+[node name="HairColor2" type="RichTextLabel" parent="."]
+offset_left = 578.0
+offset_top = 608.0
+offset_right = 680.0
+offset_bottom = 666.0
+text = "Skin Color"
+
+[node name="ChangeSkinRed" type="TextureButton" parent="."]
+offset_left = 761.0
+offset_top = 509.0
+offset_right = 1075.0
+offset_bottom = 836.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("10_n7ghd")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinBlue" type="TextureButton" parent="."]
+offset_left = 716.0
+offset_top = 509.0
+offset_right = 1030.0
+offset_bottom = 836.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("11_nvl01")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinPurple" type="TextureButton" parent="."]
+offset_left = 671.0
+offset_top = 509.0
+offset_right = 985.0
+offset_bottom = 836.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("16_u1c27")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinGreen" type="TextureButton" parent="."]
+offset_left = 761.0
+offset_top = 554.0
+offset_right = 1075.0
+offset_bottom = 881.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("12_ivps1")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinAqua" type="TextureButton" parent="."]
+offset_left = 716.0
+offset_top = 554.0
+offset_right = 1030.0
+offset_bottom = 881.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("13_urp6f")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinBrown" type="TextureButton" parent="."]
+offset_left = 671.0
+offset_top = 554.0
+offset_right = 985.0
+offset_bottom = 881.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("17_op7ga")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinOrange" type="TextureButton" parent="."]
+offset_left = 761.0
+offset_top = 599.0
+offset_right = 1075.0
+offset_bottom = 926.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("14_bwjto")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinPink" type="TextureButton" parent="."]
+offset_left = 716.0
+offset_top = 599.0
+offset_right = 1030.0
+offset_bottom = 926.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("15_606se")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinYellow" type="TextureButton" parent="."]
+offset_left = 671.0
+offset_top = 599.0
+offset_right = 985.0
+offset_bottom = 926.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("18_q13i1")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeSkinLight" type="TextureButton" parent="."]
+offset_left = 626.0
+offset_top = 509.0
+offset_right = 940.0
+offset_bottom = 836.0
+rotation = -0.0012631583
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("20_pbfsw")
+texture_pressed = ExtResource("12_5tmop")
+
+[node name="ChangeBackground" type="TextureButton" parent="."]
+offset_left = 300.00003
+offset_top = 18.000002
+offset_right = 1126.0
+offset_bottom = 322.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+flip_h = true
+
+[node name="Background" type="RichTextLabel" parent="ChangeBackground"]
+layout_mode = 0
+offset_left = 83.33317
+offset_top = 33.333324
+offset_right = 905.55524
+offset_bottom = 344.44446
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 120
+text = "Background"
+
+[node name="ChangeBackgroundBack" type="TextureButton" parent="."]
+offset_left = 680.0
+offset_top = 18.0
+offset_right = 1506.0
+offset_bottom = 322.0
+scale = Vector2(0.18, 0.18)
+texture_normal = ExtResource("8_dw050")
+
+[node name="Background2" type="RichTextLabel" parent="ChangeBackgroundBack"]
+layout_mode = 0
+offset_left = 55.554688
+offset_top = 33.333344
+offset_right = 877.77673
+offset_bottom = 344.4445
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 120
+text = "Background"
+
+[connection signal="pressed" from="ChangeHair" to="." method="_on_change_hair_pressed"]
+[connection signal="pressed" from="ChangeFace" to="." method="_on_change_face_pressed"]
+[connection signal="pressed" from="ChangeClothes" to="." method="_on_change_clothes_pressed"]
+[connection signal="pressed" from="ChangeDueldisk" to="." method="_on_change_dueldisk_pressed"]
+[connection signal="pressed" from="Random" to="." method="_on_random_pressed"]
+[connection signal="pressed" from="ChangeHairBack" to="." method="_on_change_hair_back_pressed"]
+[connection signal="pressed" from="ChangeFaceBack" to="." method="_on_change_face_back_pressed"]
+[connection signal="pressed" from="ChangeClothesBack" to="." method="_on_change_clothes_back_pressed"]
+[connection signal="pressed" from="ChangeDueldiskBack" to="." method="_on_change_dueldisk_back_pressed"]
+[connection signal="pressed" from="Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="ResetColor" to="." method="_on_reset_color_pressed"]
+[connection signal="pressed" from="ChangeHairRed" to="." method="_on_change_hair_red_pressed"]
+[connection signal="pressed" from="ChangeHairBlue" to="." method="_on_change_hair_blue_pressed"]
+[connection signal="pressed" from="ChangeHairGreen" to="." method="_on_change_hair_green_pressed"]
+[connection signal="pressed" from="ChangeHairAqua" to="." method="_on_change_hair_aqua_pressed"]
+[connection signal="pressed" from="ChangeHairOrange" to="." method="_on_change_hair_orange_pressed"]
+[connection signal="pressed" from="ChangeHairPink" to="." method="_on_change_hair_pink_pressed"]
+[connection signal="pressed" from="ChangeHairPurple" to="." method="_on_change_hair_purple_pressed"]
+[connection signal="pressed" from="ChangeHairBrown" to="." method="_on_change_hair_brown_pressed"]
+[connection signal="pressed" from="ChangeHairYellow" to="." method="_on_change_hair_yellow_pressed"]
+[connection signal="pressed" from="ChangeSkinRed" to="." method="_on_change_skin_red_pressed"]
+[connection signal="pressed" from="ChangeSkinBlue" to="." method="_on_change_skin_blue_pressed"]
+[connection signal="pressed" from="ChangeSkinPurple" to="." method="_on_change_skin_purple_pressed"]
+[connection signal="pressed" from="ChangeSkinGreen" to="." method="_on_change_skin_green_pressed"]
+[connection signal="pressed" from="ChangeSkinAqua" to="." method="_on_change_skin_aqua_pressed"]
+[connection signal="pressed" from="ChangeSkinBrown" to="." method="_on_change_skin_brown_pressed"]
+[connection signal="pressed" from="ChangeSkinOrange" to="." method="_on_change_skin_orange_pressed"]
+[connection signal="pressed" from="ChangeSkinPink" to="." method="_on_change_skin_pink_pressed"]
+[connection signal="pressed" from="ChangeSkinYellow" to="." method="_on_change_skin_yellow_pressed"]
+[connection signal="pressed" from="ChangeSkinLight" to="." method="_on_change_skin_light_pressed"]
+[connection signal="pressed" from="ChangeBackground" to="." method="_on_change_background_pressed"]
+[connection signal="pressed" from="ChangeBackgroundBack" to="." method="_on_change_background_back_pressed"]
