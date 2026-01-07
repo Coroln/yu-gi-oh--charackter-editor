@@ -47,11 +47,26 @@ func _ready():
 	for n in dir.get_files():
 		ssCount += 1
 
+const CAPTURE_RECT := Rect2(Vector2(306, 96), Vector2(512, 384))
+
+func get_canvas_to_viewport_scale() -> Vector2:
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var window_size: Vector2 = Vector2(DisplayServer.window_get_size())
+
+	return window_size / viewport_size
+
+
 func pictures():
 	await RenderingServer.frame_post_draw
-	var region = Rect2(306.5,96.5,512.5,383.5)
-	var img = get_viewport().get_texture().get_image().get_region(region)
-	img.save_png("user://pictures/ss"+str(ssCount)+".png")
+
+	var viewport_scale := get_canvas_to_viewport_scale()
+
+	var scaled_rect := Rect2(CAPTURE_RECT.position * viewport_scale, CAPTURE_RECT.size * viewport_scale)
+
+	var img := get_viewport().get_texture().get_image()
+	img = img.get_region(scaled_rect)
+
+	img.save_png("user://pictures/ss" + str(ssCount) + ".png")
 	ssCount += 1
 
 func _on_change_hair_pressed():
@@ -159,6 +174,10 @@ func _on_change_background_back_pressed():
 
 func _on_save_pressed():
 	pictures()
+	var _folder_path := ProjectSettings.globalize_path("user://pictures")
+	await RenderingServer.frame_post_draw
+	OS.shell_open(_folder_path)
+
 
 @onready var skin_sprites := [
 	get_node("CompositeSprite/Face"),
